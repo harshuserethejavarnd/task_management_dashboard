@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/dashboardPage/Header'
 import SummarySec from '../components/dashboardPage/SummarySec'
 import TaskContext from '../context/TaskContext'
+import TaskTable from '../components/dashboardPage/TaskTable'
 
 const DashboardPage = () => {
   
@@ -17,6 +18,7 @@ const DashboardPage = () => {
       <Box sx={{width:"100%", height:"100%", backgroundColor:"#fff", borderRadius:"8px", overflow:"scroll", paddingLeft:"5px", paddingRight:"5px"}}>
        <Header />
        <SummarySec />
+       <TaskTable />
       </Box>
     </Container>
    </>

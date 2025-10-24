@@ -1,34 +1,47 @@
-import React from 'react'
-import { BarChart, Bar, Legend, Tooltip } from 'recharts';
+import React from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
+// Dummy data for the week
 const data = [
-  {
-    name: 'Tasks',
-    Total: 40,
-    Running: 12,
-    Pending: 8,
-    Completed: 15,
-  }
+  { name: "Mon", tasksCompleted: 12 },
+  { name: "Tue", tasksCompleted: 5 },
+  { name: "Wed", tasksCompleted: 9 },
+  { name: "Thu", tasksCompleted: 15 },
+  { name: "Fri", tasksCompleted: 7 },
+  { name: "Sat", tasksCompleted: 3 },
+  { name: "Sun", tasksCompleted: 6 },
 ];
 
 const BarChartComponent = () => {
   return (
-    <>
-     <BarChart
-      style={{ width: '100%', maxWidth: '450px', maxHeight: '225px', aspectRatio: 1.618, }}
-      responsive
-      data={data}
-    >
-      <Bar dataKey="Total" fill="#4d2bcf" />
-      <Bar dataKey="Running" fill="#eb01e6" />
-      <Bar dataKey="Pending" fill="#ffba29" />
-      <Bar dataKey="Completed" fill="#fe8142" />
-     
-      
-     
-    </BarChart>
-    </>
-  )
-}
+    <ResponsiveContainer width="80%" aspect={1.6}>
+      <BarChart
+        data={data}
+        margin={{ top: 50, right: 30, left: 0, bottom: 10 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip cursor={{ fill: "rgba(77, 43, 207, 0.1)" }} />
 
-export default BarChartComponent
+        <Bar
+          dataKey="tasksCompleted"
+          fill="#4d2bcf"
+          name="Tasks Completed"
+          radius={[5, 5, 0, 0]}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default BarChartComponent;

@@ -57,7 +57,7 @@ const Sidebar = () => {
       icon: <DashboardIcon sx={{ fontSize: "1.3rem", color: "#989898ff" }} />,
     },
     {
-      title: "All Tasks",
+      title: "My Tasks",
       path: "/tasks",
       icon: <AssignmentIcon sx={{ fontSize: "1.3rem", color: "#989898ff" }} />,
     },
@@ -260,7 +260,7 @@ const Sidebar = () => {
       <Box
         sx={{
           width: "100%",
-          backgroundColor: "#f5f4f4",
+          backgroundColor: "#f4f4f4ff",
           height: "100%",
           borderRadius: "15px",
           padding: "5px",

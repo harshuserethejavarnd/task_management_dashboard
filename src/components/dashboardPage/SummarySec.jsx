@@ -38,7 +38,7 @@ const SummarySec = () => {
 
   //completed Task
   const completedtaskCount = () => {
-    const filteredData = data.filter((e) => e.isCompleted === "true");
+    const filteredData = data.filter((e) => e.status === "Completed");
     return filteredData?.length;
   };
 
@@ -85,7 +85,7 @@ const SummarySec = () => {
       >
         <Box sx={{ pl: 2, pt:1 }}>
           <Typography
-            sx={{ fontSize: "1.5rem", fontWeight: "500", m: 0, p: 0 }}
+            sx={{ fontSize: "1.5rem", fontWeight: "500", m: 0, p: 0, color:"#000" }}
           >
             Hello! Username
           </Typography>
@@ -108,12 +108,12 @@ const SummarySec = () => {
 
       <Box sx={{ width: "100%", height: "100%", display:"flex", justifyContent:"space-between",}}>
         <Box sx={{width:"49%", height:"100%", backgroundColor:"#fff", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"10px", boxShadow: "1px 1px 5px 1px #00000020", position:"relative"}}>
-        <Typography sx={{position:"absolute", top:10, left:20, fontSize:".9rem", fontWeight:"600"}}>Task Distribution I</Typography>
+        <Typography sx={{position:"absolute", top:10, left:20, fontSize:".9rem", fontWeight:"600"}}>Task Distribution</Typography>
         <PieChartComponent />
         </Box>
         <Box sx={{width:"49%", height:"100%", backgroundColor:"#fff", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"10px", boxShadow: "1px 1px 5px 1px #00000020", position:"relative"}}>
-          <Typography sx={{position:"absolute", top:10, left:20, fontSize:".9rem", fontWeight:"600"}}>Task Distribution II</Typography>
-           <Card sx={{width:"100px", height:"125px", backgroundColor:"#fff", position:"absolute", top:10, right:10, boxShadow:"none", lineHeight:"5px", alignContent:"center"}}>
+          <Typography sx={{position:"absolute", top:10, left:20, fontSize:".9rem", fontWeight:"600"}}>Task Completed Weekly</Typography>
+           {/* <Card sx={{width:"100px", height:"125px", backgroundColor:"#fff", position:"absolute", top:10, right:10, boxShadow:"none", lineHeight:"5px", alignContent:"center"}}>
             <ListItem sx={{display:"flex", gap:"5px", fontSize:".7rem", color:"#4c2bce"}}>
                <Box sx={{width:"8px", height:"10px", backgroundColor:"#4c2bce"}}></Box> Total
             </ListItem>
@@ -126,7 +126,7 @@ const SummarySec = () => {
             <ListItem sx={{display:"flex", gap:"5px", fontSize:".7rem", color:"#ffba29"}}>
                <Box sx={{width:"8px", height:"10px", backgroundColor:"#ffba29"}}></Box> Completed
             </ListItem>
-           </Card>
+           </Card> */}
           <BarChartComponent />
         </Box>
       </Box>

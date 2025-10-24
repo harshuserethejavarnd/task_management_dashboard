@@ -95,6 +95,31 @@ const TaskProvider = ({ children }) => {
     }
   };
 
+  //Task Counts Funtions
+   //Total Tasks
+  const totalTaskCount = () => {
+    return data?.length;
+  };
+
+  //Running Tasks
+  const runningTaskCount = () => {
+    const filteredData = data.filter((e) => e.status === "in-progress");
+    return filteredData?.length;
+  };
+
+  //Pending Task
+  const pendingTaskCount = () => {
+    const filteredData = data.filter((e) => e.status === "to-do");
+    return filteredData?.length;
+  };
+
+  //completed Task
+  const completedtaskCount = () => {
+    const filteredData = data.filter((e) => e.status === "Completed");
+    return filteredData?.length;
+  };
+
+
   return (
     <TaskContext.Provider
       value={{
@@ -105,6 +130,10 @@ const TaskProvider = ({ children }) => {
         deleteTask,
         updateTask,
         completeTask,
+        totalTaskCount,
+        runningTaskCount,
+        pendingTaskCount,
+        completedtaskCount
       }}
     >
       {children}
