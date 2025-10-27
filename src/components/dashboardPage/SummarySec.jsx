@@ -13,9 +13,17 @@ import EggIcon from "@mui/icons-material/Egg";
 import TaskContext from "../../context/TaskContext";
 import PieChartComponent from "../charts/PieChart";
 import BarChartComponent from "../charts/BarChart";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import '../../styles/responsive.css';
 
 
 const SummarySec = () => {
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md")); //900
+    const customWidth = useMediaQuery('(max-width:400px)');
+
   //Context Data --->
   const { data, loading, fetchTask, addTask } = useContext(TaskContext);
 
@@ -62,7 +70,7 @@ const SummarySec = () => {
     <Box
       sx={{
         width: "100%",
-        height: "45%",
+        height: isMobile ? "100%" : "45%",
         display:"flex",
         flexDirection:"column",
         gap:"15px"
@@ -71,7 +79,7 @@ const SummarySec = () => {
       <Box
         sx={{
           width: "100%",
-          height: "40%",
+          height: isMobile ? "20%" : "80%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-evenly",
@@ -93,41 +101,33 @@ const SummarySec = () => {
             {dateTime}
           </Typography>
         </Box>
-        <Box sx={{ display: "flex", width: "100%" }}>
+        <Box sx={{ display: "flex", width: "100%", flexWrap: isMobile ? "wrap" : "nowrap"}}>
           {cardInfo.map((e, index) => (
-            <ListItem
+            <Box>
+             <ListItem
               key={index}
               sx={{ fontWeight: "500", fontSize: ".9rem", color: "gray" }}
             >
               <EggIcon sx={{ fontSize: "1.2rem", color: e.color }} />
               {e.name}: {e.val}
             </ListItem>
+            </Box>
           ))}
         </Box>
       </Box>
 
-      <Box sx={{ width: "100%", height: "100%", display:"flex", justifyContent:"space-between",}}>
-        <Box sx={{width:"49%", height:"100%", backgroundColor:"#fff", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"10px", boxShadow: "1px 1px 5px 1px #00000020", position:"relative"}}>
+      <Box sx={{ width: "100%", height: "100%", display:"flex", justifyContent:"space-between", flexDirection: isMobile ? "column" : "row"}}>
+       
+        <Box sx={{width: isMobile ? "100%" : "49%", height: isMobile ? "30%" : "100%", backgroundColor:"#fff", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"10px", boxShadow: "1px 1px 5px 1px #00000020", position:"relative"}}>
         <Typography sx={{position:"absolute", top:10, left:20, fontSize:".9rem", fontWeight:"600"}}>Task Distribution</Typography>
-        <PieChartComponent />
+        <PieChartComponent isMobile={isMobile} />
         </Box>
-        <Box sx={{width:"49%", height:"100%", backgroundColor:"#fff", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"10px", boxShadow: "1px 1px 5px 1px #00000020", position:"relative"}}>
+
+
+        <Box sx={{top: isMobile ? -280 : 0, width: isMobile ? "100%" : "49%", height: isMobile ? "30%" : "100%", backgroundColor:"#fff", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"10px", boxShadow: "1px 1px 5px 1px #00000020", position:"relative"}}>
           <Typography sx={{position:"absolute", top:10, left:20, fontSize:".9rem", fontWeight:"600"}}>Task Completed Weekly</Typography>
-           {/* <Card sx={{width:"100px", height:"125px", backgroundColor:"#fff", position:"absolute", top:10, right:10, boxShadow:"none", lineHeight:"5px", alignContent:"center"}}>
-            <ListItem sx={{display:"flex", gap:"5px", fontSize:".7rem", color:"#4c2bce"}}>
-               <Box sx={{width:"8px", height:"10px", backgroundColor:"#4c2bce"}}></Box> Total
-            </ListItem>
-            <ListItem sx={{display:"flex", gap:"5px", fontSize:".7rem", color:"#b82acf"}}>
-               <Box sx={{width:"8px", height:"10px", backgroundColor:"#b82acf"}}></Box> Running
-            </ListItem>
-            <ListItem sx={{display:"flex", gap:"5px", fontSize:".7rem", color:"#ef8002"}}>
-               <Box sx={{width:"8px", height:"10px", backgroundColor:"#ef8002"}}></Box> Pending
-            </ListItem>
-            <ListItem sx={{display:"flex", gap:"5px", fontSize:".7rem", color:"#ffba29"}}>
-               <Box sx={{width:"8px", height:"10px", backgroundColor:"#ffba29"}}></Box> Completed
-            </ListItem>
-           </Card> */}
-          <BarChartComponent />
+          
+          <BarChartComponent isMobile={isMobile} />
         </Box>
       </Box>
     </Box>

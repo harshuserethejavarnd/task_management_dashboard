@@ -10,7 +10,7 @@ import {
 import "../../App.css";
 import TaskContext from "../../context/TaskContext";
 
-const PieChartComponent = () => {
+const PieChartComponent = ({isMobile}) => {
 
   const {totalTaskCount, runningTaskCount, pendingTaskCount, completedtaskCount} = useContext(TaskContext);
 
@@ -35,7 +35,7 @@ const PieChartComponent = () => {
 
   return (
     <>
-      <ResponsiveContainer height="90%" width="100%">
+      <ResponsiveContainer height="100%" width="100%">
         <PieChart>
           <MyPie />
           <Label position="center" fill="#666"></Label>

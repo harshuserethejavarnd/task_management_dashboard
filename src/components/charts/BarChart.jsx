@@ -21,9 +21,9 @@ const data = [
   { name: "Sun", tasksCompleted: 6 },
 ];
 
-const BarChartComponent = () => {
+const BarChartComponent = ({isMobile}) => {
   return (
-    <ResponsiveContainer width="80%" aspect={1.6}>
+    <ResponsiveContainer width={isMobile ? "100%" : "80%"} aspect={1.6}>
       <BarChart
         data={data}
         margin={{ top: 50, right: 30, left: 0, bottom: 10 }}

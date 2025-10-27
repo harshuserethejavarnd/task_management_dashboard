@@ -30,6 +30,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import TaskContext from "../context/TaskContext";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const style = {
   position: "absolute",
@@ -47,6 +49,8 @@ const style = {
 const minDate = dayjs();
 
 const Sidebar = () => {
+    const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { addTask, loading, fetchTask } = useContext(TaskContext);
 
   //Side Nav Items
@@ -107,7 +111,8 @@ const Sidebar = () => {
     <Container
       varient="permanent"
       sx={{
-        width: "18vw",
+        width: isMobile ? "100%" : "18vw",
+        height: isMobile ? "100%" : "auto",
         paddingTop: "15px",
         paddingBottom: "15px",
         display: "flex",
@@ -282,7 +287,7 @@ const Sidebar = () => {
             alignItems: "center",
             color: "#4c2bce",
             fontWeight: "500",
-            fontSize: "1.2rem",
+            fontSize: isMobile ? "4vw" : "1.2vw",
             marginTop: ".5vw",
           }}
         >
@@ -307,10 +312,10 @@ const Sidebar = () => {
                       fontWeight: "500",
                       fontSize: ".9rem",
                       display: "flex",
-                      gap: 1,
+                      gap:1
                     }}
                   >
-                    <ListItemIcon>{list.icon}</ListItemIcon>
+                    {list.icon}
                     {list.title}
                   </ListItemButton>
                 </ListItem>
@@ -324,7 +329,7 @@ const Sidebar = () => {
               display: "flex",
               flexDirection: "column",
               gap: 1,
-              marginTop: "160%",
+              marginTop: isMobile ? "120vw" : "160%",
             }}
           >
             <Button

@@ -4,14 +4,19 @@ import { Box, Container, Typography } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/dashboardPage/Header";
 import AllTaskTable from "../components/taskPage/AllTaskTable";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import SideBarMenu from "../components/mobile/SideBarMenu";
 
 const TasksPage = () => {
+     const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <>
-      <Sidebar />
+      {isMobile ? <SideBarMenu /> : <Sidebar />}
       <Container
         sx={{
-          width: "80vw",
+          width: isMobile ? "100vw" : "80vw",
           minHeight: "100vh",
           backgroundColor: "#fff",
           paddingTop: "12px",
@@ -28,8 +33,9 @@ const TasksPage = () => {
             borderRadius: "8px",
           }}
         >
-          <Header />
-          <AllTaskTable />
+                  {isMobile ? <Box sx={{ marginTop: "15vw" }}></Box> : <Header />}
+
+          <AllTaskTable isMobile={isMobile} />
         </Box>
       </Container>
     </>

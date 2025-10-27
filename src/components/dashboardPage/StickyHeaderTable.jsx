@@ -12,6 +12,8 @@ import { Box, Button, Chip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+
+
 import {
   Modal,
   Typography,
@@ -50,7 +52,16 @@ const columns = [
   },
 ];
 
-function createData(id, index, name, status, createdOn, dueDate, size, taskDesc) {
+function createData(
+  id,
+  index,
+  name,
+  status,
+  createdOn,
+  dueDate,
+  size,
+  taskDesc
+) {
   return { id, index, name, status, createdOn, dueDate, size, taskDesc };
 }
 
@@ -75,7 +86,7 @@ export default function StickyHeadTable() {
     status: "to-do",
     isCompleted: false,
   });
-  const[selectedRow, setSelectedRow] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   const newDateFormat = (rawDate) => {
     const date = new Date(rawDate);
@@ -139,7 +150,9 @@ export default function StickyHeadTable() {
   const handleDateChange = (newDate) => {
     setFormData((prev) => ({
       ...prev,
-      dueDate: newDate ? newDate.format("YYYY-MM-DD") : null,
+      dueDate: newDate.format("YYYY-MM-DD")
+        ? newDate.format("YYYY-MM-DD")
+        : null,
     }));
   };
 
@@ -162,21 +175,29 @@ export default function StickyHeadTable() {
   const handleClose = () => setOpen(false);
 
   const handleEditChange = (rowData) => {
-    console.log(rowData);
+    
     setFormData({
       taskName: rowData.name,
       taskDesc: rowData.taskDesc,
-      dueDate: rowData.dueDate ? dayjs(rowData.dueDate) : null,
+      dueDate: rowData.dueDate
+        ? dayjs(rowData.dueDate).format("YYYY-MM-DD")
+        : null,
       status: rowData.status,
       isCompleted: rowData.isCompleted,
     });
-    setSelectedRow(rowData)
+    setSelectedRow(rowData);
     handleOpen();
   };
 
+  const formattedDueDte = formData.dueDate
+    ? dayjs(formData.dueDate).format("YYYY-MM-DD")
+    : null;
+
+  console.log(formData.dueDate);
+
   return (
     <>
-      {/* MODAL CODE BELOW */}
+      {/* EDIT MODAL CODE BELOW */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -241,7 +262,7 @@ export default function StickyHeadTable() {
             <DatePicker
               label="Due Date"
               name="dueDate"
-              value={formData.dueDate ? dayjs(formData.dueDate) : null}
+              value={formData.dueDate ? dayjs(formattedDueDte) : null}
               onChange={handleDateChange}
               slotProps={{
                 textField: {
@@ -322,7 +343,7 @@ export default function StickyHeadTable() {
           </Box>
         </Box>
       </Modal>
-      {/* MODAL CODE ABOVE */}
+      {/* EDIT MODAL CODE ABOVE */}
 
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 650 }}>
@@ -347,14 +368,9 @@ export default function StickyHeadTable() {
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
+                .map((row, index) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.status}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                       {columns.map((column) => {
                         const value = row[column.id];
 
